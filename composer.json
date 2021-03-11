@@ -1,5 +1,17 @@
 {
-    "require": {
-        "vlucas/phpdotenv": "^5.3"
+    "name": "realtanya/contipay-plugin",
+    "description": "A contipay gateway package composer package",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Nigel Jaure",
+            "email": "nigel@contitouch.co.zw"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
     }
 }
