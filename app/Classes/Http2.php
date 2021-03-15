@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace ContiPay\Classes;
 
 class Http2
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Classes;
+namespace ContiPay\Classes;
 
 use Symfony\Component\HttpClient\HttpClient;
 
