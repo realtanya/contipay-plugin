@@ -10,7 +10,7 @@ class Contipay
     protected $webhookUrl;
     protected $succesUrl;
     protected $cancelUrl;
-    protected $merchant_id;
+    protected $merchantId;
 
     const URL = 'https://api2-test.contipay.co.zw';
     const ADJUST = "/transaction/update";
@@ -63,6 +63,8 @@ class Contipay
     public function preparePostPaymentData($arr_1 = [])
     {
         $arr_2 = [
+            'reference' =>  Util::generate(5),
+            'merchantId' => $this->getMerchantId(),
             'webhookUrl' => $this->getWebhookUrl(),
             'successUrl' => $this->getSuccesUrl(),
             'cancelUrl' => $this->getCancelUrl()
@@ -109,26 +111,6 @@ class Contipay
     public function setApi_secret($api_secret)
     {
         $this->api_secret = $api_secret;
-
-        return $this;
-    }
-
-    /**
-     * Get the value of merchant_id
-     */
-    public function getMerchant_id()
-    {
-        return $this->merchant_id;
-    }
-
-    /**
-     * Set the value of merchant_id
-     *
-     * @return  self
-     */
-    public function setMerchant_id($merchant_id)
-    {
-        $this->merchant_id = $merchant_id;
 
         return $this;
     }
@@ -189,6 +171,26 @@ class Contipay
     public function setWebhookUrl($webhookUrl)
     {
         $this->webhookUrl = $webhookUrl;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of merchantId
+     */
+    public function getMerchantId()
+    {
+        return $this->merchantId;
+    }
+
+    /**
+     * Set the value of merchantId
+     *
+     * @return  self
+     */
+    public function setMerchantId($merchantId)
+    {
+        $this->merchantId = $merchantId;
 
         return $this;
     }
