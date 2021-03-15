@@ -1,2 +1,8 @@
 /vendor
+/logs
 .env
+webhook.php
+success.php
+cancel.php
+test.php
+test2.php
