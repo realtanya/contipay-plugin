@@ -109,10 +109,10 @@ class Util
     {
         if ($data['status'] == 'Error') {
             // log data
-            Util::logger($data);
+            Util::logger(json_encode($data));
         } else {
             //log data 
-            Util::logger($data);
+            Util::logger(json_encode($data));
 
             // redirect to contipay
             $redirectUrl = $data['redirectUrl'];
