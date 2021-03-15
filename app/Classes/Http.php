@@ -1,6 +1,6 @@
 <?php
 
-namespace ContiPay\Classes;
+namespace App\Classes;
 
 /**
  *

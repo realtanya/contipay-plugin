@@ -1,6 +1,6 @@
 <?php
 
-namespace ContiPay\Classes;
+namespace App\Classes;
 
 class Contipay
 {
@@ -27,23 +27,30 @@ class Contipay
 
     public function payment(array $data)
     {
-        $http = new Http2;
         $auth = $this->prepareAuth();
+        // $http = new Http2;
+        $client = Util::http($auth);
 
-        $url = self::URL . self::ACQUIRE;
+        // $url = self::URL . self::ACQUIRE;
 
         $payload = $this->preparePostPaymentData($data);
 
-        $http->http($url, json_encode($payload), self::PUT, $auth);
+        // $http->http($url, json_encode($payload), self::PUT, $auth);
 
-        $response = json_decode($http->getResponse(), true);
+        $res = $client->request(self::PUT, self::ACQUIRE, [
+            'json' => $payload
+        ]);
 
-        // log data 
-        Util::logger(json_encode($response));
+        Util::dump_die($res);
 
-        $redirectUrl = $response['redirectUrl'];
+        // $response = json_decode($http->getResponse(), true);
 
-        Util::redirect($redirectUrl);
+        // // log data 
+        // Util::logger(json_encode($response));
+
+        // $redirectUrl = $response['redirectUrl'];
+
+        // Util::redirect($redirectUrl);
     }
 
     public function prepareAuth()

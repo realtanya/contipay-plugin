@@ -1,8 +1,8 @@
 <?php
 
-namespace ContiPay\Classes;
+namespace App\Classes;
 
-use Symfony\Component\HttpClient\HttpClient;
+use GuzzleHttp\Client;
 
 class Util
 {
@@ -90,14 +90,14 @@ class Util
 
     public static function http($auth = null)
     {
-        $client =  HttpClient::createForBaseUri(self::URL, [
+        $client = new Client([
+            'base_uri' => self::URL,
             'headers' => [
                 'Content-Type' => ' application/json',
                 'Accept' => 'application/json',
                 'Authorization' => $auth
             ]
         ]);
-
         return $client;
     }
 
