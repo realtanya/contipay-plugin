@@ -27,30 +27,25 @@ class Contipay
 
     public function payment(array $data)
     {
+        // prepare auth token 
         $auth = $this->prepareAuth();
-        // $http = new Http2;
+
+        // initialize http client
         $client = Util::http($auth);
 
-        // $url = self::URL . self::ACQUIRE;
-
+        // prepare post data/payload
         $payload = $this->preparePostPaymentData($data);
 
-        // $http->http($url, json_encode($payload), self::PUT, $auth);
-
+        // send a request
         $res = $client->request(self::PUT, self::ACQUIRE, [
             'json' => $payload
         ]);
 
-        Util::dump_die($res);
+        // decode json response
+        $response = json_decode($res->getBody()->getContents(), true);
 
-        // $response = json_decode($http->getResponse(), true);
-
-        // // log data 
-        // Util::logger(json_encode($response));
-
-        // $redirectUrl = $response['redirectUrl'];
-
-        // Util::redirect($redirectUrl);
+        // check if error exist, if does not, redirect to contipay
+        Util::checkError($response);
     }
 
     public function prepareAuth()

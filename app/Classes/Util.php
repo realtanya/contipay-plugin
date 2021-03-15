@@ -6,7 +6,7 @@ use GuzzleHttp\Client;
 
 class Util
 {
-    const URL = 'http://api2-test.contipay.co.zw';
+    const URL = 'https://api2-test.contipay.co.zw';
 
     public static function dump($data)
     {
@@ -26,12 +26,7 @@ class Util
         echo "</code>";
     }
 
-    public function line_break($num)
-    {
-        echo "<br>";
-    }
-
-    public static function generate($val)
+    public static function generate(int $val)
     {
         $chars = '0123456789abcdefghijklmnopqrstvwZABCDEFGHIJKLMNOPQRSTVUXWz';
         $str = '';
@@ -79,15 +74,6 @@ class Util
         return $sanitized_auth;
     }
 
-    public static function preparePaymentData($arr_1, $arr_2)
-    {
-        $payload = [];
-
-        $payload  = array_merge($arr_1, $arr_1);
-
-        return $payload;
-    }
-
     public static function http($auth = null)
     {
         $client = new Client([
@@ -107,17 +93,30 @@ class Util
         exit();
     }
 
-    public static function logger($text, $location = 'logs', $client = null)
+    public static function logger($text, $location = 'logs')
     {
         $date = date("Y-m-d H:i:s");
         $filename = date('Y_m_d') . '_logs';
 
-        // TODO: find a way to display text beautifully
-
-        $logging_text = "$date Log: $text Client/User: $client";
+        $logging_text = "$date Log: $text";
 
         $log = file_put_contents("./$location/$filename.txt", $logging_text . PHP_EOL, FILE_APPEND | LOCK_EX);
 
         return true;
+    }
+
+    public static function checkError(array $data)
+    {
+        if ($data['status'] == 'Error') {
+            // log data
+            Util::logger($data);
+        } else {
+            //log data 
+            Util::logger($data);
+
+            // redirect to contipay
+            $redirectUrl = $data['redirectUrl'];
+            Util::redirect($redirectUrl);
+        }
     }
 }
