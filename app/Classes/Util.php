@@ -119,4 +119,15 @@ class Util
             Util::redirect($redirectUrl);
         }
     }
+
+    public static function webhookResponse(string $type = 'json')
+    {
+        if ($type == 'array') {
+            $data = file_get_contents("php://input");
+            return json_decode($data, true);
+        } else {
+            $data = file_get_contents("php://input");
+            return $data;
+        }
+    }
 }

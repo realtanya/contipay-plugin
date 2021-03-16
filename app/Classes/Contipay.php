@@ -44,7 +44,7 @@ class Contipay
         // decode json response
         $response = json_decode($res->getBody()->getContents(), true);
 
-        // check if error exist, if does not, redirect to contipay
+        // check if error exist, if does not redirect to contipay, else throw an error
         Util::checkError($response);
     }
 
